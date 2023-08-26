@@ -1,0 +1,37 @@
+body {
+  background: blue;
+}
+#area {
+  background: white;
+  width: 450px;
+  margin-top: 40px;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+#object {
+  width: 60px;
+  aspect-ratio: 1;
+  background: orange;
+  transform: translateY(-100%);
+  position: relative;
+}
+
+#object.active{
+  animation-name: movement;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+
+}
+.score {
+  color: orange;
+  padding: 20px;
+  margin-top: 20px;
+  border: solid orange 5px;
+  width: 100px;
+}
+@keyframes movement {
+  to {
+    transform: translateY(450px);
+  }
+}
