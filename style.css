@@ -1,12 +1,17 @@
 body {
-  background: blue;
+  background: rgb(50, 50, 180);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Занимаем 100% высоты окна */
+  margin: 0;
 }
 #area {
   background: white;
-  width: 450px;
-  margin-top: 40px;
+  width: 650px;
   aspect-ratio: 1;
   overflow: hidden;
+  border-radius: 5%;
 }
 #object {
   width: 60px;
@@ -18,22 +23,68 @@ body {
   border-radius: 100%;
 }
 
-#object.active{
+#object.active {
   animation-name: movement;
   animation-duration: 3s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
-
 }
 .score {
   color: orange;
   padding: 20px;
   margin-top: 20px;
+  margin-left: 20px;
   border: solid orange 5px;
   width: 100px;
+  background-color: rgba(255, 165, 0, 0.1);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;
+  font-size: 18px;
+  border-radius: 10px;
 }
+button {
+  margin-right: 20px;
+  padding: 10px 20px;
+  border-radius: 5%;
+  background-color: orange;
+  background: linear-gradient(to bottom, orange, rgba(255, 140, 0, 0.693));
+  cursor: pointer;
+  border: none;
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  text-transform: uppercase;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  background-color: rgb(0, 255, 51);
+}
+
+.congratulations {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 10%;
+  background-color: rgba(255, 145, 11, 0.969);
+  background: linear-gradient(to bottom, orange, rgba(255, 140, 0, 0.693));
+  color: white;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+.congratulations.show {
+  opacity: 1;
+}
+
 @keyframes movement {
   to {
-    transform: translateY(450px);
+    transform: translateY(650px);
   }
 }

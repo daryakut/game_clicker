@@ -2,6 +2,7 @@ let score_holder = document.querySelector(".score");
 function start_game() {
   console.log("start_game works");
   object.classList.add("active");
+  score_holder.textContent = `Score: ${score}`;
 }
 
 function hit() {
@@ -14,27 +15,31 @@ function hit() {
   change_obj_position();
   changeBackgroundColor();
   change_obj_size();
-  hit_sound.currentTime=0;
+  hit_sound.currentTime = 0;
   hit_sound.play();
+  if (score === 1) {
+    showCongratulations();
+    score = 0;
+    // win_sound.play();
+    object.classList.remove("active");
+  }
 }
 
 function miss(event) {
-  if (event.target.id == "area") {
-    console.log("miss works");
-    score--;
-    score_holder.textContent = `Score: ${score}`;
-  }
-  miss_sound.currentTime = 0;
-  miss_sound.play();
-  if (score <= -3) {
-    finish_game();
+  if (object.classList.contains("active")) {
+    if (event.target.id == "area") {
+      score--;
+      score_holder.textContent = `Score: ${score}`;
+    }
+    miss_sound.currentTime = 0;
+    miss_sound.play();
+    if (score <= -3) {
+      showLostGame();
+      object.classList.remove("active");
+    }
   }
 }
-function finish_game() {
-  object.classList.remove("active");
-  alert("You Lose. Game over");
-}
-//change_obj_position on X
+
 function change_obj_position() {
   let position = Math.random() * 390;
   object.style.left = `${position}px`;
@@ -64,8 +69,31 @@ function change_obj_size() {
   object.style.width = `${size}px`;
 }
 
+function showCongratulations() {
+  let congratulations = document.querySelector(".congratulations");
+  congratulations.textContent = "Congratulations! You won the game!";
+  congratulations.classList.add("show");
+  win_sound.play();
+  setTimeout(() => {
+    congratulations.classList.remove("show");
+  }, 7000);
+}
+
+function showLostGame() {
+  let congratulations = document.querySelector(".congratulations");
+  congratulations.textContent = "You lost the game";
+  congratulations.classList.add("show");
+  gameover_sound.play();
+  setTimeout(() => {
+    congratulations.classList.remove("show");
+  }, 6000);
+}
+
 let score = 0;
 let object = document.querySelector("#object");
+const congratulations = document.querySelector(".congratulations");
 
 const hit_sound = new Audio("sounds/hit.mp3");
 const miss_sound = new Audio("sounds/miss.mp3");
+const win_sound = new Audio("sounds/win.mp3");
+const gameover_sound = new Audio("sounds/gameover.mp3");
