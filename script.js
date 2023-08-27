@@ -17,10 +17,9 @@ function hit() {
   change_obj_size();
   hit_sound.currentTime = 0;
   hit_sound.play();
-  if (score === 1) {
+  if (score === 20) {
     showCongratulations();
     score = 0;
-    // win_sound.play();
     object.classList.remove("active");
   }
 }
